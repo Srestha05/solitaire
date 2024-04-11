@@ -1,11 +1,9 @@
 import random
-
-# Define constants
 SUITS = ["Hearts", "Diamonds", "Clubs", "Spades"]
 RANKS = [str(i) for i in range(1, 14)]
 NUM_COLUMNS = 7
 
-# Initialize the deck
+# Initializing the deck
 def initialize_deck():
     deck = []
     for suit in SUITS:
@@ -15,7 +13,7 @@ def initialize_deck():
     random.shuffle(deck)
     return deck
 
-# Deal cards to tableau
+# cards to tableau
 def deal_cards(deck):
     tableau = [[] for _ in range(NUM_COLUMNS)]
     for i in range(NUM_COLUMNS):
@@ -27,7 +25,7 @@ def deal_cards(deck):
                 tableau[i].append("Face Down")
     return tableau
 
-# Display the current state of the game
+# Displaying the current state of the game
 def display_game(deck, tableau, foundation):
     print("Main Deck:")
     print(f"Remaining cards: {len(deck)}")
@@ -44,7 +42,7 @@ def display_game(deck, tableau, foundation):
             print(card, end=", ")
         print()
 
-# Move cards from source to destination (considering multiple cards)
+# Moving cards from source to destination 
 def move_cards(source, destination, num_cards):
     valid_move = True
     if len(source) < num_cards:
@@ -56,7 +54,7 @@ def move_cards(source, destination, num_cards):
     else:
         print("There are not enough cards in the source column.")
 
-# Check if the game is won
+# Checking if the game is won
 def is_won(foundation):
     return all(len(cards) == 13 for cards in foundation.values())
 
@@ -68,7 +66,7 @@ def draw_card(deck):
         print("Main deck is empty.")
         return None
 
-# Play the Solitaire game
+# Playing
 def play_solitaire():
     deck = initialize_deck()
     tableau = deal_cards(deck)
@@ -96,14 +94,13 @@ def play_solitaire():
                 continue
             dest_pile = tableau[dest_col]
             num_cards = int(input("Enter the number of cards to move: "))
-            # Check for valid number of cards to move
+            # Checking for number of cards to move
             if num_cards <= 0 or (source_pile[-num_cards] == "Face Down" and num_cards > 1):
                 print("Invalid number of cards to move. You cannot move face-down cards alone.")
                 continue 
             move_cards(source_pile, dest_pile, num_cards)
         elif choice == "2":
-            # (Rest of code for moving to foundation remains the same)
-            # ...
+        
             pass
         elif choice == "3":
             drawn_card = draw_card(deck)
@@ -118,5 +115,5 @@ def play_solitaire():
                     dest_pile = tableau[dest_col]
                     dest_pile.append(drawn_card)
 
-# Start the game
+
 play_solitaire()
